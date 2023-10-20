@@ -1,26 +1,49 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="app">
+    <PostForm @create="createPost" />
+    <PostList :posts="posts" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import PostForm from "./components/PostForm";
+import PostList from "./components/PostList";
 export default {
-  name: "App",
   components: {
-    HelloWorld,
+    PostList,
+    PostForm,
+  },
+  data() {
+    return {
+      posts: [
+        { id: 1, title: "qwerty", body: "qwertyqwerty" },
+        { id: 2, title: "ewqewq", body: "ewqewqewqeqw" },
+      ],
+    };
+  },
+  methods: {
+    createPost(post) {
+      this.posts.push(post);
+    },
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+}
+.post {
+  padding: 5px;
+  border: 2px solid black;
+  margin: 5px;
+}
+.createPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 15vh;
 }
 </style>
